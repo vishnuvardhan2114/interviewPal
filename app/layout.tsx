@@ -24,7 +24,7 @@ export default function RootLayout({
       <body
         className={`${mono_Sans.variable} antialiased bg-slate-50`}
       >
-        <AnimatedBackground />
+        {/* <AnimatedBackground /> */}
         <div className="relative z-10">
           {children}
         </div>

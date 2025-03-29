@@ -6,31 +6,23 @@ import { Button } from "./ui/button";
 import DisplayTechIcons from "./DisplayTechIcons";
 
 import { cn, getRandomInterviewCover } from "@/lib/utils";
-// import { getFeedbackByInterviewId } from "@/lib/actions/general.action";
+import { getFeedbackByInterviewId } from "@/lib/actions/general.action";
 
 const InterviewCard = async ({
   interviewId,
-  // userId,
+  userId,
   role,
   type,
   techstack,
   createdAt,
 }: InterviewCardProps) => {
-  // const feedback =
-  //   userId && interviewId
-  //     ? await getFeedbackByInterviewId({
-  //         interviewId,
-  //         userId,
-  //       })
-  //     : null;
-
-  // Mock feedback
-  const feedback = {
-    totalScore: 80,
-    finalAssessment:
-      "Great job! You did a great job answering the questions. Keep up the good work!",
-    createdAt: Date.now(),
-  };
+  const feedback =
+    userId && interviewId
+      ? await getFeedbackByInterviewId({
+          interviewId,
+          userId,
+        })
+      : null;
 
   const normalizedType = /mix/gi.test(type) ? "Mixed" : type;
 

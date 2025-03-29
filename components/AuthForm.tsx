@@ -12,6 +12,9 @@ import Link from "next/link"
 import { toast } from "sonner"
 import FormField from "./FormField"
 import { useRouter } from "next/navigation"
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
+import { auth } from "@/firebase/client"
+import { signIn, signUp } from "@/lib/actions/auth.action"
 
 type FormType = 'sign-in' | 'sign-up';
 
@@ -36,16 +39,51 @@ const AuthForm = ({ type }: { type: FormType }) => {
         },
     })
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
+    async function onSubmit(values: z.infer<typeof formSchema>) {
         try {
             if (type === "sign-up") {
+                const { name, email, password } = values;
+
+                const userCredentials = await createUserWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                )
+                const result = await signUp({
+                    uid: userCredentials.user.uid,
+                    name: name!,
+                    email,
+                    password,
+                })
+
+                if (!result?.success) {
+                    toast.error("Error", {
+                        description: `Something went wrong ${result.message}`,
+                    })
+                    return;
+                }
                 toast.success("Success", {
                     description: "Account created successfully Please Sign in",
                 })
                 router.push("/sign-in")
-                console.log("Sign up", values)
             } else {
-                console.log("Sign in", values)
+                const { email, password } = values;
+                const userCredentials = await signInWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                )
+                const idToken = await userCredentials.user.getIdToken();
+                if (!idToken) {
+                    toast.error("Sign in failed", {
+                        description: `Something went wrong`,
+                    })
+                    return;
+                }
+                await signIn({
+                    idToken,
+                    email,
+                });
                 toast.success("Success", {
                     description: "Signed in successfully",
                 })

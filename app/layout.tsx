@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Mona_Sans } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
+import AnimatedBackground from "@/components/AnimatedBackground";
 
 const mono_Sans = Mona_Sans({
   variable: "--font-geist-sans",
@@ -19,11 +20,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <body
-        className={`${mono_Sans.variable}  antialiased pattern`}
+        className={`${mono_Sans.variable} antialiased bg-slate-50`}
       >
-        {children}
+        <AnimatedBackground />
+        <div className="relative z-10">
+          {children}
+        </div>
         <Toaster />
       </body>
     </html>

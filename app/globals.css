@@ -295,6 +295,25 @@
   }
 }
 
+@utility light-gradient {
+  @apply bg-gradient-to-r from-[#f0f4ff] to-[#e6e9ff];
+}
+
+/* Update the btn-primary class */
+.btn-primary {
+  @apply w-fit !bg-primary-200 !text-dark-100 hover:!bg-primary-200/90 !rounded-full !font-bold px-5 cursor-pointer min-h-10 shadow-md;
+}
+
+/* Update the btn-secondary class */
+.btn-secondary {
+  @apply w-fit !bg-light-400 !text-white hover:!bg-light-400/90 !rounded-full !font-bold px-5 cursor-pointer min-h-10 shadow-md;
+}
+
+/* Update the card-cta class */
+.card-cta {
+  @apply flex flex-row light-gradient rounded-3xl px-16 py-6 items-center justify-between max-sm:px-4 shadow-md;
+}
+
 @utility dark-gradient {
   @apply bg-gradient-to-b from-[#1A1C20] to-[#08090D];
 }
@@ -332,4 +351,87 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Add these modern background utilities */
+@utility bg-modern {
+  @apply bg-gradient-to-br from-slate-50 via-slate-100 to-blue-50 min-h-screen relative overflow-x-hidden;
+}
+
+.noise-overlay {
+  @apply fixed inset-0 z-0 opacity-30 pointer-events-none;
+  /* Add this to your globals.css */
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+}
+
+.gradient-blob-1 {
+  @apply fixed -top-[30%] -right-[20%] w-[70%] h-[70%] rounded-full bg-gradient-to-br from-indigo-200/20 via-purple-200/20 to-blue-200/20 blur-3xl z-0 animate-slow-pulse pointer-events-none;
+}
+
+.gradient-blob-2 {
+  @apply fixed -bottom-[30%] -left-[20%] w-[70%] h-[70%] rounded-full bg-gradient-to-br from-blue-200/20 via-indigo-200/20 to-purple-200/20 blur-3xl z-0 animate-slow-pulse-delay pointer-events-none;
+}
+
+.content-wrapper {
+  @apply relative z-10;
+}
+
+@keyframes slow-pulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes slow-pulse-delay {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+}
+
+@utility animate-slow-pulse {
+  animation: slow-pulse 15s ease-in-out infinite;
+}
+
+@utility animate-slow-pulse-delay {
+  animation: slow-pulse-delay 18s ease-in-out infinite 2s;
+}
+
+/* Update card styles to be more modern */
+.card-border {
+  @apply rounded-2xl w-fit shadow-lg border border-slate-200/50 bg-white/80 backdrop-blur-sm;
+}
+
+.card {
+  @apply rounded-2xl min-h-full bg-white/90 backdrop-blur-sm;
+}
+
+/* Update button styles */
+.btn-primary {
+  @apply w-fit bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:shadow-lg transition-all duration-300 !rounded-xl !font-medium px-5 cursor-pointer min-h-10;
+}
+
+.btn-secondary {
+  @apply w-fit bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all duration-300 !rounded-xl !font-medium px-5 cursor-pointer min-h-10 border border-slate-200;
+}
+
+/* Update card-cta for a more modern look */
+.card-cta {
+  @apply flex flex-row bg-white/80 backdrop-blur-sm rounded-3xl px-16 py-10 items-center justify-between max-sm:px-4 shadow-lg border border-slate-200/50;
+}
+
+/* Update the interviews-section */
+.interviews-section {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full;
 }

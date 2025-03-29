@@ -111,7 +111,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
                     />
                     <h2 className="text-primary-100">InterviewPal</h2>
                 </div>
-                <h3>Practice job interview with AI</h3>
+                <h3 className="text-white text-center">Practice job interview with AI</h3>
                 <Form {...form}>
                     <form
                         onSubmit={form.handleSubmit(onSubmit)}
